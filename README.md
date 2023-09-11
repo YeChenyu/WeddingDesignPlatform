@@ -1,2 +1,1 @@
 # WeddingDesignPlatform
-wedding design platform

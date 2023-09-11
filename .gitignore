@@ -1,6 +1,7 @@
 # Gradle files
 .gradle/
 build/
+target
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -14,6 +15,7 @@ captures/
 .cxx/
 *.apk
 output.json
+.DS_Store
 
 # IntelliJ
 *.iml

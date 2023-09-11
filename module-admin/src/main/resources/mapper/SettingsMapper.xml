@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 路径 指向dao层接口-->
+<mapper namespace="com.fingerart.weddingdesign.mapper.SettingsMapper">
+
+    <resultMap id="TypeSettingMap" type="com.fingerart.weddingdesign.entity.TSettings">
+        <id property="id" column="sId" jdbcType="INTEGER"/>
+        <result property="itemGroup" column="sGroup" jdbcType="INTEGER"/>
+        <result property="itemName" column="sName" jdbcType="VARCHAR"/>
+        <result property="itemValue" column="sValue" jdbcType="VARCHAR"/>
+        <result property="description" column="sDescription" jdbcType="VARCHAR"/>
+        <result property="updateAt" column="sUpdateAt" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+        <result property="createAt" column="sCreateAt" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+    </resultMap>
+
+    <select id="selectSettingMapByGroup" resultMap="TypeSettingMap">
+        select
+            s.id as sId,
+            s.item_group as sGroup,
+            s.item_name as sName,
+            s.item_value as sValue,
+            s.description as sDescription,
+            s.update_at as sUpdateAt,
+            s.create_at as sCreateAt
+        from t_settings as s
+        where s.item_group = #{group}
+    </select>
+
+</mapper>

@@ -1,0 +1,76 @@
+server:
+  port: 10003
+spring:
+  application:
+    name: module-admin
+  profiles:
+    active: dev #默认为开发环境
+  servlet:
+    multipart:
+      enabled: true #开启文件上传
+      max-file-size: 10MB #限制文件上传大小为10M
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis:
+  mapper-locations:
+    - classpath:com/**/mapper/*.xml
+    - classpath*:mapper/**/*.xml
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: module-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+redis:
+  database: WeddingDesign
+  key:
+    admin: 'admin'
+    resourceList: 'resourceList'
+  expire:
+    common: 86400 # 24小时
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /admin/test
+      - /user/login
+      - /minio/upload
+
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com # oss对外服务的访问域名
+    accessKeyId: test # 访问身份验证中用到用户标识
+    accessKeySecret: test # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName: macro-oss # oss的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: http://39.98.190.128:8080/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: weddingdesign/images/ # 上传文件夹路径前缀
+
+wechat:
+  mini: # 小程序开发信息
+    appId: 'wx4fdf83097880db2f'
+    appSecret: '3643e1b4308f76b6d74690e780525848'
+  public: # 公众号开发信息
+    appId: 'wxf6729355c940d0c8'
+    appSecret: 'd98e7d0cad25c19d940f7e7816c276f7'
